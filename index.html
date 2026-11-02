@@ -251,8 +251,8 @@ body.in #who{white-space:normal;overflow-wrap:anywhere}
 body:not(.ready) #welcome .wc *{animation-play-state:paused}
 #welcome.wx{animation:wout .55s ease-in forwards}
 @keyframes wout{to{opacity:0;transform:scale(1.18);filter:blur(12px)}}
-#auth.open .box{animation:boxin .55s cubic-bezier(.34,1.5,.64,1) both}
-@keyframes boxin{0%{opacity:0;transform:translateY(18px) scale(.93)}100%{opacity:1;transform:translateY(0) scale(1)}}
+#auth.open .box{transform-origin:center;animation:boxin .78s cubic-bezier(.2,.85,.22,1) both}
+@keyframes boxin{0%{opacity:0;clip-path:inset(0 48% 0 48% round 32px);transform:perspective(900px) rotateY(-12deg) translateY(18px) scale(.94);filter:blur(8px)}55%{opacity:1;filter:blur(0)}100%{opacity:1;clip-path:inset(0 0 0 0 round 32px);transform:perspective(900px) rotateY(0) translateY(0) scale(1);filter:blur(0)}}
 body.in main,body.in #home{animation:pagein .6s cubic-bezier(.2,.8,.2,1) both}
 @keyframes pagein{from{opacity:0;transform:translateY(24px)}}
 @media(prefers-reduced-motion:reduce){#intro{display:none}}
@@ -444,6 +444,7 @@ body.in #fC .sec i,body.in #fD .sec i{background:linear-gradient(135deg,#ff6a46,
 body.in #fC input:focus-visible,body.in #fC textarea:focus-visible,body.in #fC select:focus-visible,body.in #fD input:focus-visible,body.in #fD textarea:focus-visible,body.in #fD select:focus-visible{border-bottom-color:#ff6478;box-shadow:inset 0 2px 8px rgba(0,0,0,.12),0 8px 22px rgba(255,45,80,.24)}
 @media(prefers-reduced-motion:reduce){#auth::before,#auth::after,#welcome::before,#welcome::after{animation:none}}
 @media(max-width:900px){#auth .box{min-height:0;padding:34px 26px}}
+@media(prefers-reduced-motion:reduce){#auth.open .box{animation:none;clip-path:none;filter:none;transform:none}}
 </style>
 </head>
 <body>
