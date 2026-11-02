@@ -796,7 +796,7 @@ $("dnow").onclick=function(){$("dd").value=todayISO();$("dtm").value=nowHM();dra
 $("cnow").onclick=function(){var d=new Date(),s=d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"})+" · "+ftime(nowHM()),c=$("cd");c.value=c.value.trim()?c.value.trim()+" | "+s:s;draw()};
 function openAuth(m){var a=$("auth");a.classList.add("open");otpPending=null;clearInterval(otpCdT);showOTPStep(false);setMode(m);var b=a.querySelector(".box");try{b.scrollIntoView({behavior:"smooth",block:"nearest"})}catch(e){}setTimeout(function(){$(m==="in"&&$("au").value?"ap":"au").focus({preventScroll:true})},350)}
 $("lg").onclick=function(){openAuth("in")};$("lc").onclick=function(){openAuth("up")};$("hl").onclick=function(){openAuth("in")};
-$("bx").onclick=function(){$("auth").classList.remove("open");otpPending=null;clearInterval(otpCdT);showOTPStep(false)};
+$("bx").onclick=function(){$("auth").classList.remove("open");otpPending=null;clearInterval(otpCdT);showOTPStep(false);document.body.classList.remove("wd");$("welcome").classList.remove("wx")};
 $("wl").onclick=function(){done();setTimeout(function(){openAuth("in")},600)};
 $("navReg").onclick=function(){done();setTimeout(function(){openAuth("up")},600)};
 $("navAbout").onclick=function(){$("about").scrollIntoView({behavior:"smooth",block:"center"})};
