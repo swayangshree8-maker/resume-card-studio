@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Make resumes, cards, rent receipts, electricity statements and rent agreements online, and save them as PDF."><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#07040f"><link rel="icon" href="icons/icon-192.png"><script src="config.js"></script><title>Resume &amp; Card Studio</title>
+<meta name="description" content="Make resumes, cards, rent receipts, electricity statements and rent agreements online, and save them as PDF."><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#03040b"><link rel="icon" href="icons/icon-192.png"><script src="config.js"></script><title>Resume &amp; Card Studio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Playfair+Display:ital,wght@1,600&display=swap">
 <style>
 :root{--bg:#eef2f6;--panel:#fff;--ink:#14213d;--mute:#5b6678;--line:#d5dce6;--acc:#2a5bd7;--accsoft:#e3ebfc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -57,8 +57,8 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 #resume.bn .hd p{font-size:.82rem;margin:0}
 @media(max-width:560px){#resume.sb{grid-template-columns:1fr}#resume.sb>div{padding:0 20px 28px}}
 .av{width:96px;height:96px;border-radius:20px;margin:0 auto 12px;display:grid;place-items:center;font-size:1.8rem;font-weight:800}
-#auth{min-height:100vh;display:grid;place-items:center;padding:20px;position:relative;overflow:hidden;background:linear-gradient(135deg,#07040f,#1a0942 48%,#06223f)}
-#auth::before,#auth::after{content:"";position:absolute;border-radius:50%;filter:blur(60px);opacity:.85;animation:drift 14s ease-in-out infinite alternate}
+#auth{min-height:100vh;display:grid;place-items:center;padding:20px;position:relative;overflow:hidden;background:linear-gradient(150deg,#03040b,#0d1130 35%,#180a36 62%,#061c30 100%)}
+#auth::before,#auth::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;animation:drift 14s ease-in-out infinite alternate}
 #auth::before{width:380px;height:380px;background:#ff2bd6;top:-90px;left:-70px}
 #auth::after{width:420px;height:420px;background:#00e5ff;bottom:-120px;right:-80px;animation-delay:-6s}
 @keyframes drift{to{transform:translate(70px,50px) scale(1.15)}}
@@ -75,6 +75,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 #otpInput{letter-spacing:.5em;font-weight:800;text-align:center;font-size:1.1rem}
 #otpResend:disabled{opacity:.55;cursor:default}
 .otp-step.shakeb{animation:shk .45s}
+.otp-step{overflow-wrap:anywhere;word-break:break-word}
 #auth h1{margin-bottom:6px;color:#fff;text-shadow:0 0 18px rgba(255,255,255,.55)}
 #glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--mx,50%) var(--my,35%),rgba(255,255,255,.3),rgba(125,162,255,.12) 40%,transparent 70%)}
 #auth .orb{position:absolute;border-radius:50%;pointer-events:none;background:linear-gradient(145deg,rgba(255,255,255,.34),rgba(255,255,255,.04));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.32);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 10px 40px rgba(10,20,60,.25);animation:floaty 9s ease-in-out infinite alternate}
@@ -117,8 +118,8 @@ body.in main{padding-top:20px}
 #resume.el .chips{justify-content:center}
 #resume.cr aside{background:linear-gradient(170deg,#0b1020,var(--rc))}
 #resume.cr>div h2{font-size:2.1rem}
-body.in{background:radial-gradient(rgba(0,240,255,.16) 1px,transparent 1px) 0 0/26px 26px,linear-gradient(135deg,#07040f,#1a0942 48%,#06223f) fixed;color:#fff}
-body.in::before,body.in::after{content:"";position:fixed;border-radius:50%;filter:blur(70px);opacity:.7;z-index:0;pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
+body.in{background:radial-gradient(rgba(0,240,255,.14) 1px,transparent 1px) 0 0/26px 26px,linear-gradient(150deg,#03040b,#0d1130 35%,#180a36 62%,#061c30 100%) fixed;color:#fff}
+body.in::before,body.in::after{content:"";position:fixed;border-radius:50%;filter:blur(95px);opacity:.5;z-index:0;pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
 body.in::before{width:380px;height:380px;background:#ff2bd6;top:-100px;left:18%}
 body.in::after{width:420px;height:420px;background:#00e5ff;bottom:-120px;right:-60px;animation-delay:-6s}
 body.in header,body.in main{position:relative;z-index:1}
@@ -149,8 +150,8 @@ body.in #resume,body.in #card{box-shadow:0 24px 70px rgba(5,10,40,.5),0 0 0 1px 
 .hcard .d{font-size:.92rem;opacity:.92}
 .hcard .go2{display:inline-block;margin-top:18px;padding:9px 18px;border-radius:12px;background:#fff;color:#14213d;font-weight:700;font-size:.9rem}
 body:not(.in) #home{display:none}
-#welcome{position:fixed;inset:0;z-index:50;display:grid;place-items:center;text-align:center;overflow:hidden;color:#fff;background:linear-gradient(135deg,#07040f,#1a0942 48%,#06223f)}
-#welcome::before,#welcome::after{content:"";position:absolute;border-radius:50%;filter:blur(60px);opacity:.85;animation:drift 14s ease-in-out infinite alternate}
+#welcome{position:fixed;inset:0;z-index:50;display:grid;place-items:center;text-align:center;overflow:hidden;color:#fff;background:linear-gradient(150deg,#03040b,#0d1130 35%,#180a36 62%,#061c30 100%)}
+#welcome::before,#welcome::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;animation:drift 14s ease-in-out infinite alternate}
 #welcome::before{width:400px;height:400px;background:#ff2bd6;top:-100px;left:-60px}
 #welcome::after{width:440px;height:440px;background:#00e5ff;bottom:-130px;right:-80px;animation-delay:-6s}
 body.wd #welcome{display:none}
@@ -229,7 +230,7 @@ body.in .pbox{border-color:rgba(255,255,255,.6);background-color:rgba(255,255,25
 #eye[aria-pressed=true] .sl{stroke-dashoffset:0}
 #auth input::placeholder{color:rgba(255,255,255,.55)}
 body.in #who{white-space:normal;overflow-wrap:anywhere}
-#intro{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;gap:24px;color:#fff;background:radial-gradient(circle at 50% 45%,#2a0f5e,#05030c 72%);animation:iris 1s cubic-bezier(.7,0,.3,1) 2.3s forwards}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;gap:24px;color:#fff;background:radial-gradient(circle at 50% 45%,#1c0e3e,#03040b 72%);animation:iris 1s cubic-bezier(.7,0,.3,1) 2.3s forwards}
 @keyframes iris{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 100% 0 0)}}
 #intro.gone{display:none}
 .ig{position:relative;width:132px;height:132px;display:grid;place-items:center}
@@ -250,8 +251,8 @@ body.in #who{white-space:normal;overflow-wrap:anywhere}
 body:not(.ready) #welcome .wc *{animation-play-state:paused}
 #welcome.wx{animation:wout .55s ease-in forwards}
 @keyframes wout{to{opacity:0;transform:scale(1.18);filter:blur(12px)}}
-body.wd #auth .box{animation:boxin .8s cubic-bezier(.2,.8,.2,1) both}
-@keyframes boxin{from{opacity:0;transform:translateY(40px) scale(.92);filter:blur(8px)}}
+#auth.open .box{animation:boxin .55s cubic-bezier(.34,1.5,.64,1) both}
+@keyframes boxin{0%{opacity:0;transform:translateY(18px) scale(.93)}100%{opacity:1;transform:translateY(0) scale(1)}}
 body.in main,body.in #home{animation:pagein .6s cubic-bezier(.2,.8,.2,1) both}
 @keyframes pagein{from{opacity:0;transform:translateY(24px)}}
 @media(prefers-reduced-motion:reduce){#intro{display:none}}
@@ -315,6 +316,13 @@ body.in #fC input:focus-visible,body.in #fC textarea:focus-visible,body.in #fC s
 body.in #fC label{font-size:.8rem;letter-spacing:.03em;transition:color .2s}
 body.in #fC label:focus-within{color:#7cf8ff}
 #hf{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;display:none;padding:11px 18px;border-radius:99px;border:1px solid rgba(255,255,255,.5);cursor:pointer;font:inherit;font-weight:700;color:#fff;background:linear-gradient(145deg,rgba(255,255,255,.34),rgba(255,255,255,.12));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 10px 30px rgba(5,10,40,.4);animation:bob 2.6s ease-in-out infinite}
+@media(max-width:680px){
+#hf{right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:50px;height:50px;padding:0;border-radius:50%;font-size:0;display:none}
+#hf::before{content:"💬";font-size:1.3rem}
+body.in.wd #hf{display:flex;align-items:center;justify-content:center}
+#fR,#fC,#fD{padding-bottom:78px}
+#home{padding-bottom:78px}
+}
 body.in.wd #hf{display:block}
 #hf:hover,#hf:focus-visible{box-shadow:0 0 28px rgba(255,255,255,.55),0 10px 30px rgba(5,10,40,.4);outline:none}
 @media print{#hf{display:none}}
@@ -391,7 +399,7 @@ body.in .tabs button[aria-selected=true]{box-shadow:0 0 18px rgba(0,240,255,.7)}
 #welcome .wl{filter:drop-shadow(0 0 26px rgba(255,43,214,.75))}
 .corner2.pri,.hcta,.wgo,body.in .go{box-shadow:0 0 22px rgba(0,240,255,.45)}
 @media(max-width:759px){.tabs{flex-wrap:wrap;max-width:100%}.tabs button{flex:1 1 auto;padding:8px 12px}}
-@media print{#hf,#mo,#hii,#intro,#help,#welcome,#auth,#mc,#clk2{display:none!important}}
+@media print{#hf,#mo,#hii,#intro,#help,#welcome,#auth,#mc,#clk2,#clkw,#ft{display:none!important}}
 #help .note2{font-size:.78rem;opacity:.85;margin-top:-4px}
 .clk2{font-size:.74rem;color:rgba(255,255,255,.88);font-weight:600}
 #clkw{position:fixed;top:calc(18px + env(safe-area-inset-top,0px));right:18px;z-index:6;display:grid;gap:2px;justify-items:end;text-align:right;padding:10px 16px;border-radius:16px;color:#fff;background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.06));border:1px solid rgba(0,240,255,.4);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 0 22px rgba(0,229,255,.25),0 10px 28px rgba(5,3,20,.35)}
@@ -410,8 +418,32 @@ body.in.sbc #clkw{right:18px}
 .ftb{text-align:center;margin:20px 0 0;font-size:.76rem;opacity:.65}
 #ft{grid-column:1/-1}
 #home h2{margin-top:0}
+#auth input:not([type=file]):not([type=checkbox]).typing{animation:typeglow .55s ease-in-out infinite}
+@keyframes typeglow{0%,100%{box-shadow:inset 0 2px 8px rgba(0,0,0,.18),0 0 0 3px rgba(124,248,255,.22),0 0 14px rgba(124,248,255,.4)}50%{box-shadow:inset 0 2px 8px rgba(0,0,0,.18),0 0 0 4px rgba(124,248,255,.5),0 0 28px rgba(124,248,255,.85)}}
 .hide{display:none!important}
 @media print{header,.form,.hint{display:none}body,main{background:#fff;display:block;padding:0}#resume,#card{box-shadow:none}}
+/* Warm red theme: keep the existing pages and controls, only shift the shared backdrop and login accents. */
+#welcome,#auth{background:linear-gradient(145deg,#080508 0%,#1b050b 42%,#310710 72%,#100609 100%)}
+#welcome::before,#auth::before{background:#ff1646;opacity:.42}
+#welcome::after,#auth::after{background:#ff522e;opacity:.32}
+body.in{background:radial-gradient(rgba(255,45,80,.13) 1px,transparent 1px) 0 0/26px 26px,linear-gradient(145deg,#090609,#1b070d 42%,#300a12 72%,#100609) fixed;color:#fff}
+body.in::before{background:#e3133f}
+body.in::after{background:#ff572f}
+#auth .box{border-color:rgba(255,75,100,.52);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 30px rgba(255,35,75,.2),0 24px 60px rgba(5,3,12,.55)}
+#auth .box{min-height:clamp(560px,76vh,720px);padding:42px 30px 38px;display:flex;flex-direction:column;justify-content:center}
+#auth .orb{border-color:rgba(255,110,125,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.42),0 10px 40px rgba(80,5,20,.28)}
+#auth .go,#auth .corner2.pri,#auth .hcta{background:linear-gradient(100deg,#ff314f,#c90031);color:#fff;box-shadow:0 0 24px rgba(255,35,75,.34)}
+#auth input:focus-visible{outline-color:#ff6478}
+#glow{background:radial-gradient(520px circle at var(--mx,50%) var(--my,35%),rgba(255,110,130,.24),rgba(255,45,75,.1) 40%,transparent 70%)}
+body.in header{border-right-color:rgba(255,95,115,.28)}
+@media screen and (min-width:760px){body.in header{height:100vh;min-height:100vh;align-self:stretch}}
+body.in .form,body.in .tabs,body.in .tips,.hcard{border-color:rgba(255,95,115,.38)}
+body.in .go{background:linear-gradient(100deg,#ff314f,#c90031);color:#fff}
+body.in .tabs button[aria-selected=true]{background:linear-gradient(100deg,#ff314f,#c90031);color:#fff}
+body.in #fC .sec i,body.in #fD .sec i{background:linear-gradient(135deg,#ff6a46,#d8003b);color:#fff;box-shadow:0 4px 14px rgba(255,35,75,.35)}
+body.in #fC input:focus-visible,body.in #fC textarea:focus-visible,body.in #fC select:focus-visible,body.in #fD input:focus-visible,body.in #fD textarea:focus-visible,body.in #fD select:focus-visible{border-bottom-color:#ff6478;box-shadow:inset 0 2px 8px rgba(0,0,0,.12),0 8px 22px rgba(255,45,80,.24)}
+@media(prefers-reduced-motion:reduce){#auth::before,#auth::after,#welcome::before,#welcome::after{animation:none}}
+@media(max-width:900px){#auth .box{min-height:0;padding:34px 26px}}
 </style>
 </head>
 <body>
@@ -672,6 +704,8 @@ function sendOTP(){if(!otpPending)return;var code=genOTP();otpPending.code=code;
 function startOTP(u,entry){otpPending={u:u,entry:entry};showOTPStep(true);sendOTP()}
 $("otpVerify").onclick=function(){var t=$("otpMsg");t.textContent="";if(!otpPending){t.textContent="Session expired. Please sign up again.";return}var code=$("otpInput").value.trim();if(!code){t.textContent="Enter the 6-digit code.";return}if(Date.now()>otpPending.expires){t.textContent="Code expired. Tap \u201cResend code\u201d for a new one.";return}if(code!==otpPending.code){t.textContent="Incorrect code. Please try again.";var bb=document.querySelector("#otpStep");bb.classList.remove("shakeb");void bb.offsetWidth;bb.classList.add("shakeb");return}var all=users();if(all[otpPending.u]){t.textContent="That username was just taken. Please sign up again.";return}all[otpPending.u]=otpPending.entry;st("rcs_users",JSON.stringify(all));var u=otpPending.u;otpPending=null;clearInterval(otpCdT);showOTPStep(false);enter(u,1)};
 $("otpResend").onclick=function(){if(otpCd<=0)sendOTP()};
+$("otpInput").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();$("otpVerify").click()}});
+document.querySelectorAll("#auth input").forEach(function(el){var tgt;el.addEventListener("input",function(){el.classList.add("typing");clearTimeout(tgt);tgt=setTimeout(function(){el.classList.remove("typing")},500)});el.addEventListener("blur",function(){el.classList.remove("typing")})});
 $("otpBack").onclick=function(){otpPending=null;clearInterval(otpCdT);showOTPStep(false)};
 $("af").onsubmit=function(e){e.preventDefault();$("am").className="hint";$("au").classList.remove("bad");$("ap").classList.remove("bad");var u=$("au").value.trim().toLowerCase(),p=$("ap").value,m=$("am");
   if(u.length<3){m.textContent="Username must be at least 3 characters.";return}
