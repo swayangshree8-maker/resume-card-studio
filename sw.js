@@ -1,4 +1,4 @@
-const CACHE_NAME = "rcs-v49";
+const CACHE_NAME = "rcs-v50";
 const STATIC_FILES = [
   "./",
   "./index.html",
