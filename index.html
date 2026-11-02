@@ -349,6 +349,13 @@ body.in header h1{white-space:normal}
 #doc .sl2{width:180px;border-top:1px solid #1b2333;margin:0 0 6px auto}
 #doc .sg2 .sl2{margin:0 0 6px 0}
 @media print{#doc{box-shadow:none!important}}
+#letter{width:100%;max-width:640px;min-height:760px;padding:48px;color:#1b2333;background:#fff;box-shadow:0 24px 70px rgba(5,10,40,.5),0 0 0 1px rgba(255,255,255,.3);font-family:Georgia,"Times New Roman",serif;overflow-wrap:anywhere}
+#letter .ltitle{text-align:center;font-size:1.5rem;letter-spacing:.12em;text-transform:uppercase;border-bottom:3px double #a51d38;padding-bottom:12px;color:#71152b}
+#letter .lmeta{margin:20px 0 32px;line-height:1.7}
+#letter .lbody{white-space:pre-line;line-height:1.85;margin-top:22px}
+#letter .lsign{margin-top:34px;line-height:1.8}
+@media(max-width:700px){#letter{padding:28px 22px;min-height:680px}}
+@media print{#letter{box-shadow:none!important}}
 #fD{gap:14px;padding:18px 16px}
 #fD .sec{display:flex;align-items:center;gap:10px;margin:10px 0 0;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#fff}
 #fD .sec i{font-style:normal;flex:none;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,#00f0ff,#ff2bd6);color:#0a0614;box-shadow:0 4px 12px rgba(255,43,214,.45)}
@@ -472,6 +479,7 @@ body.in #fC input:focus-visible,body.in #fC textarea:focus-visible,body.in #fC s
     <button role="tab" id="tR" aria-selected="true">Resume Maker</button>
     <button role="tab" id="tC" aria-selected="false">Card Designer</button>
     <button role="tab" id="tD" aria-selected="false">Rent &amp; Bills</button>
+    <button role="tab" id="tL" aria-selected="false">Cover Letter</button>
   </div>
 </header>
 <main>
@@ -521,10 +529,24 @@ Google UX Design Certificate, 2023</textarea></label>
     <label data-f="a">🗓️ Start date<input id="dst" value="1 November 2026"></label>
     <button class="go" id="pd" type="button">Save as PDF (Print)</button>
   </section>
+  <section class="form hide" id="fL">
+    <h4 class="sec"><i>1</i>Your details</h4>
+    <label>👤 Full name<input id="ln" value="Rahul Sharma"></label>
+    <div class="row"><label>✉️ Email<input id="le" value="rahul@email.com"></label><label>📞 Phone<input id="lp" value="+91 98765 43210"></label></div>
+    <label>📍 Address<input id="la" value="Bhubaneswar, Odisha"></label>
+    <h4 class="sec"><i>2</i>Job details</h4>
+    <label>💼 Position<input id="lj" value="Frontend Developer"></label>
+    <label>🏢 Company<input id="lcname" value="ABC Technologies"></label>
+    <label>👋 Hiring manager (optional)<input id="lh" placeholder="Hiring Manager"></label>
+    <h4 class="sec"><i>3</i>Your letter</h4>
+    <label>✍️ Message<textarea id="lm" rows="9">I am excited to apply for this role. My experience building accessible, reliable web applications has prepared me to contribute to your team. I would welcome the opportunity to discuss how my skills can support your goals.</textarea></label>
+    <button class="go" id="pl" type="button">Save as PDF (Print)</button>
+  </section>
   <section class="stage">
     <article id="resume"></article>
     <article id="card" class="hide"></article>
     <article id="doc" class="hide"></article>
+    <article id="letter" class="hide"></article>
     <p class="hint">The preview updates live. To save a PDF, click Print and choose Save as PDF.</p>
   </section>
 </main>
@@ -533,9 +555,10 @@ Google UX Design Certificate, 2023</textarea></label>
 <a class="hcard" href="#resume"><span class="ic" aria-hidden="true">📄</span><b>Resume Maker</b><span class="d">Build a professional resume with 9 templates, including premium styles.</span><br><span class="go2">Open Resume Maker</span></a>
 <a class="hcard" href="#card"><span class="ic" aria-hidden="true">🎨</span><b>Card Designer</b><span class="d">Design birthday, invitation, greeting, visiting and profile cards.</span><br><span class="go2">Open Card Designer</span></a>
 <a class="hcard" href="#docs"><span class="ic" aria-hidden="true">🏠</span><b>Rent &amp; Bills</b><span class="d">Make a rent receipt, an electricity charges bill or a simple rent agreement.</span><br><span class="go2">Open Rent &amp; Bills</span></a>
+<a class="hcard" href="#coverletter"><span class="ic" aria-hidden="true">✉️</span><b>Cover Letter</b><span class="d">Write a tailored job application letter with a live preview and PDF export.</span><br><span class="go2">Open Cover Letter</span></a>
 </div>
 <div class="tips"><b>💡 Quick tips</b><ul><li>Fill every section to reach 100% resume strength.</li><li>Add a square photo with the 📷 box in the Resume Maker.</li><li>Press “Save as PDF (Print)” to download your work.</li><li>Everything you type is saved automatically in this browser.</li></ul></div></section>
-<footer id="ft"><div class="ftw"><div class="ftc"><b>Resume &amp; Card Studio</b><p>Make resumes, cards, rent receipts and more — free, in your browser.</p></div><nav class="ftn"><a href="#resume">Resume Maker</a><a href="#card">Card Designer</a><a href="#docs">Rent &amp; Bills</a><a href="#" id="fth">Help &amp; Contact</a></nav><div class="ftc2">📞 <a href="tel:+917328048009">7328048009</a><br>✉️ <a href="mailto:swayangshree8@gmail.com">swayangshree8@gmail.com</a></div></div><p class="ftb">© <span id="fty"></span> Resume &amp; Card Studio. All work is saved in your browser only.</p></footer>
+<footer id="ft"><div class="ftw"><div class="ftc"><b>Resume &amp; Card Studio</b><p>Make resumes, cards, cover letters and more — free, in your browser.</p></div><nav class="ftn"><a href="#resume">Resume Maker</a><a href="#card">Card Designer</a><a href="#docs">Rent &amp; Bills</a><a href="#coverletter">Cover Letter</a><a href="#" id="fth">Help &amp; Contact</a></nav><div class="ftc2">📞 <a href="tel:+917328048009">7328048009</a><br>✉️ <a href="mailto:swayangshree8@gmail.com">swayangshree8@gmail.com</a></div></div><p class="ftb">© <span id="fty"></span> Resume &amp; Card Studio. All work is saved in your browser only.</p></footer>
 <script>
 var $=function(i){return document.getElementById(i)};
 function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
@@ -573,22 +596,22 @@ function drawC(){
   var d=$("cd").value,dl=d?'<p class="by">'+esc(d)+'</p>':"";
 c.innerHTML=pf?'<div>'+(PHOTO?'<img class="av" alt="" style="display:block;object-fit:cover;border:3px solid '+t[1]+'" src="'+PHOTO+'">':'<div class="av" style="background:'+t[1]+';color:#111">'+esc($("ch").value.split(" ").map(function(w){return w[0]||""}).join("").slice(0,2).toUpperCase())+'</div>')+'<h2>'+esc($("ch").value)+'</h2><p class="by" style="margin-top:0">'+esc($("cn").value)+'</p><p style="margin-top:10px">'+esc($("cm").value)+'</p>'+dl+'</div>':'<div><h2>'+esc($("ch").value)+'</h2><p>'+esc($("cm").value)+'</p>'+dl+'<p class="by">'+esc($("cn").value)+'</p></div>';
 }
-function draw(){drawR();drawC();drawD();if(typeof pbox==="function")pbox();if(typeof prog==="function")prog();if(typeof react==="function")react();if(typeof save==="function")save()}
+function draw(){drawR();drawC();drawD();drawL();if(typeof pbox==="function")pbox();if(typeof prog==="function")prog();if(typeof react==="function")react();if(typeof save==="function")save()}
 var tab="R";
-function show(t){tab=t;$("tR").setAttribute("aria-selected",t==="R");$("tC").setAttribute("aria-selected",t==="C");
+function show(t){tab=t;$("tR").setAttribute("aria-selected",t==="R");$("tC").setAttribute("aria-selected",t==="C");$("tL").setAttribute("aria-selected",t==="L");
   $("fR").classList.toggle("hide",t!=="R");$("resume").classList.toggle("hide",t!=="R");
-  $("fC").classList.toggle("hide",t!=="C");$("card").classList.toggle("hide",t!=="C");$("tH").setAttribute("aria-selected",t==="H");document.querySelector("main").classList.toggle("hide",t==="H");$("home").classList.toggle("hide",t!=="H");$("fD").classList.toggle("hide",t!=="D");$("doc").classList.toggle("hide",t!=="D");$("tD").setAttribute("aria-selected",t==="D")}
-function route(){var h=location.hash,t=h==="#card"?"C":h==="#resume"?"R":h==="#docs"?"D":"H";show(t);document.body.classList.toggle("sbc",t!=="H");if(t==="R"&&lastT!=="R")hiiShow();lastT=t}
+  $("fC").classList.toggle("hide",t!=="C");$("card").classList.toggle("hide",t!=="C");$("tH").setAttribute("aria-selected",t==="H");document.querySelector("main").classList.toggle("hide",t==="H");$("home").classList.toggle("hide",t!=="H");$("fD").classList.toggle("hide",t!=="D");$("doc").classList.toggle("hide",t!=="D");$("tD").setAttribute("aria-selected",t==="D");$("fL").classList.toggle("hide",t!=="L");$("letter").classList.toggle("hide",t!=="L")}
+function route(){var h=location.hash,t=h==="#card"?"C":h==="#resume"?"R":h==="#docs"?"D":h==="#coverletter"?"L":"H";show(t);document.body.classList.toggle("sbc",t!=="H");if(t==="R"&&lastT!=="R")hiiShow();lastT=t}
 $("mo").onclick=function(){document.body.classList.remove("sbc")};$("mc").onclick=function(){document.body.classList.add("sbc")};
-$("tH").onclick=function(){location.hash="home"};$("tD").onclick=function(){location.hash="docs"};$("tR").onclick=function(){location.hash="resume"};$("tC").onclick=function(){location.hash="card"};
+$("tH").onclick=function(){location.hash="home"};$("tD").onclick=function(){location.hash="docs"};$("tR").onclick=function(){location.hash="resume"};$("tC").onclick=function(){location.hash="card"};$("tL").onclick=function(){location.hash="coverletter"};
 window.addEventListener("hashchange",route);
 document.querySelectorAll("input,textarea,select").forEach(function(e){e.addEventListener("input",draw)});
 $("ct").addEventListener("change",function(){var m={"Visiting card":["Rahul Sharma","Frontend Developer","+91 98765 43210 | rahul@email.com","Bhubaneswar"],"Birthday card":["Happy Birthday!","Wishing you a day filled with joy.","","Rahul"],"Invitation":["You are invited","We are hosting a small party at our home. We would love to see you there.","Saturday, 7 PM | Bhubaneswar","From our family"],"Greeting card":["Happy Diwali","May the light of the diyas bring joy to your home.","","Rahul"],"Profile card":["Rahul Sharma","Web developer who enjoys building clean, fast websites.","rahul@email.com | +91 98765 43210","Frontend Developer"]}[this.value];$("ch").value=m[0];$("cm").value=m[1];$("cd").value=m[2];$("cn").value=m[3];draw()});
-$("pr").onclick=$("pc").onclick=$("pd").onclick=function(){try{window.print()}catch(e){alert("Printing is blocked here. Open the page in your browser and try again.")}};
+$("pr").onclick=$("pc").onclick=$("pd").onclick=$("pl").onclick=function(){try{window.print()}catch(e){alert("Printing is blocked here. Open the page in your browser and try again.")}};
 sw($("rsw"),rcol,function(){return rcol.indexOf(rc)},function(i){rc=rcol[i]});
 sw($("csw"),themes,function(){return th},function(i){th=i});
 var PHOTO="";
-var IDS=["n","ti","em","ph","ci","su","ex","ed","ce","sk","rt","ct","ch","cm","cd","cn","cl","dty","dl","dt","da","dm","dd","dr","dp","dn","dpr","dcr","drt","dinc","dtm","dur","dep","dst"],U=null,mode="in";
+var IDS=["n","ti","em","ph","ci","su","ex","ed","ce","sk","rt","ct","ch","cm","cd","cn","cl","dty","dl","dt","da","dm","dd","dr","dp","dn","dpr","dcr","drt","dinc","dtm","dur","dep","dst","ln","le","lp","la","lj","lcname","lh","lm"],U=null,mode="in";
 function snap(){var o={rc:rc,th:th,photo:PHOTO};IDS.forEach(function(i){o[i]=$(i).value});return o}
 var DEF=snap();
 function swAll(){sw($("rsw"),rcol,function(){return rcol.indexOf(rc)},function(i){rc=rcol[i]});sw($("csw"),themes,function(){return th},function(i){th=i})}
@@ -652,6 +675,7 @@ function drawD(){var t=$("dty").value,k=t==="Rent Receipt"?"r":t==="Electricity 
  else{var du=esc($("dur").value),dp=num("dep"),st2=esc($("dst").value);
   h='<h2 class="dt">Rent Agreement</h2><p class="note">Sample draft for reference. Please get it reviewed by a lawyer, and stamp or register it as required in your state.</p><p class="dbody">This agreement is made on <b>'+DTD+'</b> between <b>'+L+'</b> (the &ldquo;Landlord&rdquo;) and <b>'+T+'</b> (the &ldquo;Tenant&rdquo;) for the property at <b>'+A+'</b>.</p><ol class="cl"><li>The tenancy is for <b>'+du+' months</b>, starting from <b>'+st2+'</b>.</li><li>The monthly rent is <b>'+inr(rent)+'</b> (Rupees '+words(rent)+' only), payable in advance on or before the 5th of every month.</li><li>The Tenant has paid an interest-free security deposit of <b>'+inr(dp)+'</b>, refundable when the Tenant vacates, after deducting any dues or damages.</li><li>Electricity, water and maintenance charges are payable by the Tenant as per actual usage.</li><li>The property shall be used for residential purposes only. Subletting is not allowed without the Landlord&rsquo;s written consent.</li><li>The Tenant shall keep the property in good condition and return it peacefully on expiry, normal wear and tear excepted.</li><li>Either party may end this agreement by giving one month&rsquo;s written notice.</li><li>Rent may be revised on renewal by mutual written consent.</li></ol><div class="sg2"><div><div class="sl2"></div>Landlord<br><b>'+L+'</b></div><div><div class="sl2"></div>Tenant<br><b>'+T+'</b></div></div><p class="note">Witness 1: ____________ &nbsp;&nbsp; Witness 2: ____________</p>'}
  $("doc").innerHTML=h}
+function drawL(){var name=esc($("ln").value),email=esc($("le").value),phone=esc($("lp").value),address=esc($("la").value),job=esc($("lj").value),company=esc($("lcname").value),hiring=$("lh").value.trim(),body=esc($("lm").value),today=new Date().toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});$("letter").innerHTML='<h2 class="ltitle">Cover Letter</h2><div class="lmeta"><b>'+name+'</b><br>'+address+'<br>'+email+' &nbsp;|&nbsp; '+phone+'<br><br>'+today+'<br><br>'+company+'</div><p>Dear '+(hiring?esc(hiring):'Hiring Team')+',</p><p>I am writing to apply for the <b>'+job+'</b> position at <b>'+company+'</b>.</p><p class="lbody">'+body+'</p><div class="lsign">Thank you for your consideration.<br><br>Sincerely,<br><b>'+name+'</b></div>'}
 function ubadge(){var b=$("ub");if(!b)return;var u=U||"",pic=PHOTO||(u&&st("rcs_pic_"+u))||"",m=u.match(/[a-z0-9]/i),h=0;for(var i=0;i<u.length;i++)h=(h*31+u.charCodeAt(i))%360;b.style.setProperty("--u1","hsl("+h+",80%,58%)");b.style.setProperty("--u2","hsl("+((h+60)%360)+",75%,48%)");b.style.backgroundImage=pic?'url("'+pic+'")':"";b.textContent=pic?"":(m?m[0].toUpperCase():"?");b.title=u}
 function todayISO(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function nowHM(){var d=new Date();return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")}
