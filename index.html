@@ -608,9 +608,12 @@ body.in .go,body.in #out,body.in #bk,body.in #hp{background:linear-gradient(105d
 body.in .go:hover{box-shadow:0 14px 30px rgba(62,122,242,.38)}
 #home .home-banner{background:linear-gradient(115deg,rgba(5,103,145,.68),rgba(30,48,120,.76) 52%,rgba(119,32,158,.54));border-color:rgba(131,194,255,.3)}
 #home .home-banner::after{background:rgba(19,186,223,.27)}
+#home .home-banner::before{content:"";position:absolute;z-index:-1;width:190px;height:190px;right:86px;top:50%;border:1px solid rgba(190,220,255,.3);border-radius:28px;transform:translateY(-50%) rotate(45deg);box-shadow:0 0 32px rgba(95,185,255,.12),inset 0 0 28px rgba(95,185,255,.06);pointer-events:none}
 .hcard{border-color:rgba(151,199,255,.26);background:linear-gradient(145deg,rgba(52,102,178,.24),rgba(81,52,137,.15));box-shadow:0 18px 42px rgba(2,9,30,.22),inset 0 1px rgba(255,255,255,.12)}
 .hcard:hover,.hcard:focus-visible{border-color:rgba(125,211,255,.72);box-shadow:0 24px 55px rgba(0,0,0,.26),0 0 36px rgba(44,143,231,.22)}
 .hcard .ic{background:linear-gradient(145deg,rgba(21,190,216,.2),rgba(133,67,207,.25));border:1px solid rgba(172,208,255,.14)}
+#home .hcard .ic{position:relative;isolation:isolate;background:none;border:0}
+#home .hcard .ic::before{content:"";position:absolute;z-index:-1;inset:8px;border-radius:12px;background:linear-gradient(145deg,rgba(130,200,255,.25),rgba(205,95,255,.16));border:1px solid rgba(180,210,255,.38);transform:rotate(45deg);box-shadow:0 0 22px rgba(100,175,255,.16)}
 .hcard .go2{color:#123c7d}
 body.in .tips{background:linear-gradient(145deg,rgba(32,79,139,.58),rgba(67,38,118,.52));border-color:rgba(151,199,255,.26)}
 body.in #fR .pg{background:rgba(5,20,49,.34);border-color:rgba(150,198,255,.19)}
