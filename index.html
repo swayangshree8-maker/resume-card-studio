@@ -233,8 +233,8 @@ body.in .pbox{border-color:rgba(255,255,255,.6);background-color:rgba(255,255,25
 #eye[aria-pressed=true] .sl{stroke-dashoffset:0}
 #auth input::placeholder{color:rgba(255,255,255,.55)}
 body.in #who{white-space:normal;overflow-wrap:anywhere}
-#intro{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;gap:24px;color:#fff;background:radial-gradient(circle at 50% 45%,#1c0e3e,#03040b 72%);animation:iris 1s cubic-bezier(.7,0,.3,1) 2.3s forwards}
-@keyframes iris{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 100% 0 0)}}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;gap:24px;color:#fff;background:radial-gradient(circle at 50% 45%,#1c0e3e,#03040b 72%);transform-origin:center;animation:welcomePop 1s cubic-bezier(.2,.85,.22,1) 2.3s forwards}
+@keyframes welcomePop{0%{opacity:1;transform:scale(1);border-radius:0;clip-path:inset(0)}38%{opacity:1;transform:scale(.96);border-radius:24px;clip-path:inset(4% 3% round 28px)}100%{opacity:0;transform:scale(.72) translateY(34px);border-radius:40px;clip-path:inset(16% 22% round 42px)}}
 #intro.gone{display:none}
 .ig{position:relative;width:132px;height:132px;display:grid;place-items:center}
 .ir{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);filter:drop-shadow(0 0 10px rgba(0,240,255,.8))}
@@ -818,7 +818,7 @@ function hiiShow(){var b=document.body.classList;if(!b.contains("wd")||!b.contai
 function hiiHide(){var h=$("hii");if(h.classList.contains("hide"))return;h.classList.add("out");setTimeout(function(){h.classList.add("hide");h.classList.remove("out")},300)}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")hiiHide()});
 function done(){var w=$("welcome");if(document.body.classList.contains("wd")||w.classList.contains("wx"))return;w.classList.add("wx");setTimeout(function(){document.body.classList.add("wd");if(hiiPending){hiiPending=false;if(lastT==="R")hiiShow()}},550)}
-var intro=$("intro");intro.addEventListener("animationend",function(e){if(e.animationName==="iris")intro.classList.add("gone")});
+var intro=$("intro");intro.addEventListener("animationend",function(e){if(e.animationName==="welcomePop")intro.classList.add("gone")});
 setTimeout(function(){document.body.classList.add("ready")},2300);setTimeout(function(){intro.classList.add("gone")},3600);
 if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){intro.classList.add("gone");document.body.classList.add("ready")}
 $("wg").onclick=function(){done();setTimeout(function(){openAuth("in")},600)};
