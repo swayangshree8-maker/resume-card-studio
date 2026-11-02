@@ -752,7 +752,7 @@ function done(){var w=$("welcome");if(document.body.classList.contains("wd")||w.
 var intro=$("intro");intro.addEventListener("animationend",function(e){if(e.animationName==="iris")intro.classList.add("gone")});
 setTimeout(function(){document.body.classList.add("ready")},2300);setTimeout(function(){intro.classList.add("gone")},3600);
 if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){intro.classList.add("gone");document.body.classList.add("ready")}
-$("wg").onclick=done;
+$("wg").onclick=function(){done();setTimeout(function(){openAuth("in")},600)};
 $("hg").onclick=hiiHide;$("hii").addEventListener("click",function(e){if(e.target===this)hiiHide()});
 var GOOGLE_CLIENT_ID=window.RCS_GOOGLE_CLIENT_ID||"";
 function warn(t){$("am").className="hint";$("am").textContent=t}
