@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Make resumes, cards, rent receipts, electricity statements and rent agreements online, and save them as PDF."><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#03040b"><link rel="icon" href="icons/icon-192.png"><script src="config.js"></script><title>Resume &amp; Card Studio</title>
+<meta name="description" content="Make resumes, cards, rent receipts, electricity statements and rent agreements online, and save them as PDF."><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' mailto:; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://accounts.google.com; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; worker-src 'self'; manifest-src 'self'"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#03040b"><link rel="icon" href="icons/icon-192.png"><title>Resume &amp; Card Studio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Playfair+Display:ital,wght@1,600&display=swap">
 <style>
 :root{--bg:#eef2f6;--panel:#fff;--ink:#14213d;--mute:#5b6678;--line:#d5dce6;--acc:#2a5bd7;--accsoft:#e3ebfc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -766,7 +766,8 @@ var cl=[$("em").value,$("ph").value,$("ci").value].filter(Boolean);
 var nm='<h2>'+esc($("n").value)+'</h2><p class="t">'+esc($("ti").value)+'</p>';
 if(t==="Sidebar"||t==="Creative"){R.innerHTML='<aside>'+pic()+'<h3>Contact</h3>'+cl.map(function(x){return'<p>'+esc(x)+'</p>'}).join("")+edh+ceh+skh+'</aside><div>'+nm+sum+exh+'</div>'}
 else{R.innerHTML='<div class="hd">'+pic()+nm+'<p>'+cl.map(esc).join(" &nbsp;|&nbsp; ")+'</p></div>'+(t==="Compact"?'<div class="cols">':'')+sum+exh+edh+ceh+skh+(t==="Compact"?'</div>':'')}}
-function pic(){return PHOTO?'<img class="pic" alt="Profile photo" src="'+PHOTO+'">':'<div class="pic ph" data-ph="1" title="Add photo">📷</div>'}
+function safePhoto(v){return typeof v==="string"&&v.length<=400000&&/^data:image\/jpeg;base64,[A-Za-z0-9+/]+={0,2}$/.test(v)?v:""}
+function pic(){PHOTO=safePhoto(PHOTO);return PHOTO?'<img class="pic" alt="Profile photo" src="'+PHOTO+'">':'<div class="pic ph" data-ph="1" title="Add photo">📷</div>'}
 function drawR0(){
   var r=$("resume");r.style.setProperty("--rc",rc);
   var h=pic()+'<h2>'+esc($("n").value)+'</h2><p class="t">'+esc($("ti").value)+'</p><div class="c">'+[$("em").value,$("ph").value,$("ci").value].filter(Boolean).map(esc).join(" &nbsp;|&nbsp; ")+'</div>';
@@ -778,6 +779,7 @@ function drawR0(){
   r.innerHTML=h;
 }
 function drawC(){
+  PHOTO=safePhoto(PHOTO);
   var c=$("card"),t=themes[th],vc=$("ct").value==="Visiting card";
   c.style.background=t[0];c.style.color=t[1];var pf=$("ct").value==="Profile card";c.className="l-"+$("cl").value.toLowerCase()+(c.classList.contains("hide")?" hide":"");c.style.maxWidth=vc?"460px":pf?"380px":"500px";c.style.aspectRatio=vc?"3.5/2":pf?"4/5":"5/7";
   var d=$("cd").value,dl=d?'<p class="by">'+esc(d)+'</p>':"";
@@ -802,8 +804,9 @@ var IDS=["n","ti","em","ph","ci","su","ex","ed","ce","sk","rt","ct","ch","cm","c
 function snap(){var o={rc:rc,th:th,photo:PHOTO};IDS.forEach(function(i){o[i]=$(i).value});return o}
 var DEF=snap();
 function swAll(){sw($("rsw"),rcol,function(){return rcol.indexOf(rc)},function(i){rc=rcol[i]});sw($("csw"),themes,function(){return th},function(i){th=i})}
-function apply(o){IDS.forEach(function(i){var v=o[i]!==undefined?o[i]:(DEF&&DEF[i]);if(v!==undefined)$(i).value=v});if(o.rc)rc=o.rc;if(typeof o.th==="number")th=o.th;PHOTO=o.photo||"";swAll()}
-function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function apply(o){if(!o||typeof o!=="object"||Array.isArray(o))o=DEF||{};IDS.forEach(function(i){var v=o[i]!==undefined?o[i]:(DEF&&DEF[i]);if(typeof v==="string"&&v.length<=10000)$(i).value=v;else if(typeof v==="number"&&Number.isFinite(v))$(i).value=String(v);else if(DEF&&typeof DEF[i]==="string")$(i).value=DEF[i]});rc=rcol.indexOf(o.rc)>=0?o.rc:rcol[0];th=Number.isInteger(o.th)&&o.th>=0&&o.th<themes.length?o.th:0;PHOTO=safePhoto(o.photo);swAll()}
+function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);return true}catch(e){return null}}
+function rm(k){try{localStorage.removeItem(k);return true}catch(e){return false}}
 function users(){try{return JSON.parse(st("rcs_users")||"{}")}catch(e){return{}}}
 var KDF_ITERATIONS=310000;
 function hex(bytes){return Array.from(new Uint8Array(bytes)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
@@ -813,11 +816,11 @@ function passwordMaterial(password,salt,iterations){if(!(crypto&&crypto.subtle))
 function sealData(value,key){var iv=crypto.getRandomValues(new Uint8Array(12)),bytes=new TextEncoder().encode(JSON.stringify(value));return crypto.subtle.encrypt({name:"AES-GCM",iv:iv},key,bytes).then(function(ct){return JSON.stringify({v:1,alg:"AES-GCM",iv:toB64(iv),ct:toB64(ct)})})}
 function openData(raw,key){var box=JSON.parse(raw);if(!box||box.v!==1||box.alg!=="AES-GCM"||!box.iv||!box.ct)throw new Error("This data is not an encrypted vault.");return crypto.subtle.decrypt({name:"AES-GCM",iv:fromB64(box.iv)},key,fromB64(box.ct)).then(function(p){return JSON.parse(new TextDecoder().decode(p))})}
 var ctm;
-function save(){if(!U||!VAULT_KEY)return Promise.resolve(false);var s=snap(),u=U,seq=++saveSeq;return sealData(s,VAULT_KEY).then(function(v){if(seq===saveSeq&&U===u){st("rcs_d_"+u,v);return true}return false}).catch(function(){warn("Secure save failed. Keep this page open and try again.");return false})}
+function save(){if(!U||!VAULT_KEY)return Promise.resolve(false);var s=snap(),u=U,seq=++saveSeq;return sealData(s,VAULT_KEY).then(function(v){if(seq===saveSeq&&U===u){if(st("rcs_d_"+u,v)!==true){warn("Browser storage is full or unavailable. Download a backup before continuing.");return false}return true}return false}).catch(function(){warn("Secure save failed. Keep this page open and try again.");return false})}
 function dl(name,text){function fb(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:"application/json"}));a.download=name;document.body.appendChild(a);a.click();a.remove()}
   try{if(window.claude&&claude.use){claude.use("downloads").then(function(x){if(x)x.save({filename:name,data:text}).catch(function(){});else fb()}).catch(fb);return}}catch(e){}fb()}
 function backup(){if(!U){warn("Sign in before creating an encrypted backup.");return}var u=U;save().then(function(ok){var record;try{record=JSON.parse(st("rcs_d_"+u)||"null")}catch(e){}if(!ok||!record||record.alg!=="AES-GCM"){warn("Could not create an encrypted backup. Please try again.");return}var o={app:"resume-card-studio",users:{}};o.users[u]=users()[u];o.data={};o.data[u]=record;dl("resume-card-backup.json",JSON.stringify(o,null,1))})}
-function restore(f){$("am").className="hint";var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(o.app!=="resume-card-studio"||!o.users||!o.data)throw 0;var a=users();Object.keys(o.users).forEach(function(u){if(typeof o.users[u]!=="string"||!o.data[u]||o.data[u].alg!=="AES-GCM")throw 0;a[u]=o.users[u]});Object.keys(o.data).forEach(function(u){if(!a[u]||o.data[u].alg!=="AES-GCM")throw 0});Object.keys(o.data).forEach(function(u){st("rcs_d_"+u,JSON.stringify(o.data[u]))});st("rcs_users",JSON.stringify(a));$("am").className="hint ok";$("am").textContent="Encrypted backup restored. Sign in with each account password to unlock it."}catch(e){$("am").textContent="That backup is invalid or contains unencrypted data. No data was restored."}};r.readAsText(f)}
+function restore(f){$("am").className="hint";if(!f||f.size>3*1024*1024){$("am").textContent="Backup file is too large or unavailable (maximum 3 MB).";return}var r=new FileReader();r.onerror=function(){$("am").textContent="Could not read that backup file."};r.onload=function(){var importedKey="";try{var o=JSON.parse(r.result);if(!o||o.app!=="resume-card-studio"||!o.users||!o.data||Array.isArray(o.users)||Array.isArray(o.data))throw 0;var keys=Object.keys(o.users),dataKeys=Object.keys(o.data);if(keys.length!==1||dataKeys.length!==1||keys[0]!==dataKeys[0])throw 0;var u=keys[0],credential=o.users[u],box=o.data[u];if(!/^[a-z0-9_.+@-]{3,64}$/.test(u)||u==="__proto__"||u==="constructor"||u==="prototype"||typeof credential!=="string"||!/^v2\$[1-9][0-9]{5,6}\$[a-f0-9]{32,128}\$[a-f0-9]{64}$/.test(credential))throw 0;if(!box||box.v!==1||box.alg!=="AES-GCM"||typeof box.iv!=="string"||typeof box.ct!=="string"||box.iv.length>64||box.ct.length>4*1024*1024||!/^[A-Za-z0-9+/]+={0,2}$/.test(box.iv)||!/^[A-Za-z0-9+/]+={0,2}$/.test(box.ct)||atob(box.iv).length!==12)throw 0;var a=users();if(Object.prototype.hasOwnProperty.call(a,u)||st("rcs_d_"+u)!==null)throw new Error("exists");importedKey="rcs_d_"+u;if(st(importedKey,JSON.stringify(box))!==true)throw 0;a[u]=credential;if(st("rcs_users",JSON.stringify(a))!==true)throw 0;importedKey="";$("am").className="hint ok";$("am").textContent="Encrypted backup restored. Sign in with its account password to unlock it."}catch(e){if(importedKey)rm(importedKey);$("am").textContent=e&&e.message==="exists"?"That username already exists here. Sign in or use a different browser profile; existing data was not replaced.":"That backup is invalid, too large, or uses an unsupported format. No existing account was replaced."}};r.readAsText(f)}
 $("auth").addEventListener("pointermove",function(e){var r=this.getBoundingClientRect();this.style.setProperty("--mx",(e.clientX-r.left)+"px");this.style.setProperty("--my",(e.clientY-r.top)+"px")});
 function shake(){var b=document.querySelector("#auth .box");b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");$("ap").classList.add("bad");$("au").classList.add("bad");$("ap").value="";$("ap").focus()}
 var hiiT,hiiPending=false,lastT="";
@@ -840,7 +843,7 @@ $("gg").onclick=gsignin;
 function gaccount(){warn("Google sign-in is paused because this static app cannot protect its local vault with a Google password. Use a local username and password account.")}
 if(GOOGLE_CLIENT_ID){var gs=document.createElement("script");gs.src="https://accounts.google.com/gsi/client";gs.async=true;document.head.appendChild(gs)}
 $("eye").onclick=function(){var p=$("ap"),s=p.type==="password";p.type=s?"text":"password";this.setAttribute("aria-pressed",String(s));this.setAttribute("aria-label",s?"Hide password":"Show password");p.focus()};
-function setPhoto(f){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=240,c=document.createElement("canvas");c.width=c.height=s;var x=c.getContext("2d"),m=Math.min(im.width,im.height);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);PHOTO=c.toDataURL("image/jpeg",.85);draw()};im.src=r.result};r.readAsDataURL(f)}
+function setPhoto(f){if(!f||f.size>5*1024*1024||!["image/jpeg","image/png","image/webp"].includes(f.type)){warn("Choose a JPG, PNG, or WebP photo under 5 MB.");return}var r=new FileReader();r.onerror=function(){warn("Could not read that photo. Please choose another file.")};r.onload=function(){var im=new Image();im.onerror=function(){warn("That photo file could not be opened.")};im.onload=function(){var s=240,c=document.createElement("canvas");c.width=c.height=s;var x=c.getContext("2d"),m=Math.min(im.width,im.height);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);PHOTO=c.toDataURL("image/jpeg",.85);draw()};im.src=r.result};r.readAsDataURL(f)}
 $("pf").onchange=function(){if(this.files[0])setPhoto(this.files[0])};
 $("pbox").onclick=function(){$("pf").click()};$("pbox").onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();$("pf").click()}};
 ["dragenter","dragover"].forEach(function(n){$("pbox").addEventListener(n,function(e){e.preventDefault();this.classList.add("dr")})});
@@ -933,19 +936,26 @@ $("otpResend").onclick=function(){if(otpCd<=0)sendOTP()};
 $("otpInput").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();$("otpVerify").click()}});
 document.querySelectorAll("#auth input").forEach(function(el){var tgt;el.addEventListener("input",function(){el.classList.add("typing");clearTimeout(tgt);tgt=setTimeout(function(){el.classList.remove("typing")},500)});el.addEventListener("blur",function(){el.classList.remove("typing")})});
 $("otpBack").onclick=function(){otpPending=null;clearInterval(otpCdT);showOTPStep(false)};
+var LOGIN_LIMIT=5,LOGIN_LOCK_MS=60000;
+function loginMap(){try{var v=JSON.parse(st("rcs_login_limiter")||"{}");return v&&typeof v==="object"&&!Array.isArray(v)?v:{}}catch(e){return{}}}
+function loginWait(u){var r=loginMap()[u];return r&&Number(r.until)>Date.now()?Number(r.until)-Date.now():0}
+function recordLoginFailure(u,m){var all=loginMap(),r=all[u]||{fails:0,until:0};r.fails=(Number(r.fails)||0)+1;r.last=Date.now();if(r.fails>=LOGIN_LIMIT){r.until=Date.now()+LOGIN_LOCK_MS;r.fails=0}all[u]=r;Object.keys(all).sort(function(a,b){return(Number(all[a].last)||0)-(Number(all[b].last)||0)}).slice(0,Math.max(0,Object.keys(all).length-20)).forEach(function(k){delete all[k]});st("rcs_login_limiter",JSON.stringify(all));var wait=loginWait(u);m.textContent=wait?"Too many incorrect attempts. Try again in "+Math.ceil(wait/1000)+" seconds.":"Username or password is incorrect.";shake();$("ap").value=""}
+function clearLoginFailures(u){var all=loginMap();delete all[u];st("rcs_login_limiter",JSON.stringify(all))}
 $("af").onsubmit=function(e){e.preventDefault();$("am").className="hint";$("au").classList.remove("bad");$("ap").classList.remove("bad");var u=$("au").value.trim().toLowerCase(),p=$("ap").value,m=$("am");
   if(u.length<3){m.textContent="Username must be at least 3 characters.";return}
+  if(u.length>64||u==="__proto__"||u==="constructor"||u==="prototype"){m.textContent="Choose a username with 3 to 64 characters.";return}
   if(!/^[a-z0-9_.+@-]+$/.test(u)){m.textContent="Use only letters, numbers and . _ - + @ in the username or email.";return}
   if(u.indexOf("@")>-1&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(u)){m.textContent="Please enter a valid email address.";return}
   if(p.length<6){m.textContent="Password must be at least 6 characters.";return}
+  if(mode==="in"){var wait=loginWait(u);if(wait){m.textContent="Too many incorrect attempts. Try again in "+Math.ceil(wait/1000)+" seconds.";return}}
   var all0=users();
   if(mode==="in"&&all0[u]==="google"){m.textContent="This account signs in with Google. Use \u201cContinue with Google\u201d below.";return}
   if(mode==="up"){var salt=genSalt();hash(p,salt).then(function(mat){var all=users();if(all[u]){m.textContent="That username is taken. Try another one.";return}startOTP(u,"v2$"+KDF_ITERATIONS+"$"+salt+"$"+mat.hash,p);$("ap").value=""}).catch(function(){m.textContent="Secure account storage is unavailable in this browser."});return}
   var stored=all0[u]||"",parts=stored.split("$");
-  if(parts[0]==="v2"&&parts.length===4){var it=Number(parts[1]);if(!Number.isInteger(it)||it<100000||it>1000000){m.textContent="This account record is invalid.";return}hash(p,parts[2],it).then(function(mat){if(mat.hash===parts[3])enter(u,1,mat.key);else{m.textContent="Wrong password. Please try again.";shake()}$("ap").value=""}).catch(function(){m.textContent="Secure account storage is unavailable in this browser."})}
-  else if(parts.length===2){oldHash(p,parts[0]).then(function(h){if(h===parts[1]){var ns=genSalt();hash(p,ns).then(function(mat){var all=users();all[u]="v2$"+KDF_ITERATIONS+"$"+ns+"$"+mat.hash;st("rcs_users",JSON.stringify(all));enter(u,1,mat.key)}).catch(function(){m.textContent="Could not secure this account."})}else{m.textContent="Wrong password. Please try again.";shake()}$("ap").value=""})}
-  else if(stored){hashLegacy(p).then(function(h){if(h===stored){var ns=genSalt();hash(p,ns).then(function(mat){var all=users();all[u]="v2$"+KDF_ITERATIONS+"$"+ns+"$"+mat.hash;st("rcs_users",JSON.stringify(all));enter(u,1,mat.key)}).catch(function(){m.textContent="Could not secure this account."})}else{m.textContent="Wrong password. Please try again.";shake()}$("ap").value=""})}
-  else{m.textContent="No account found with that username.";shake();$("ap").value=""}};
+  if(parts[0]==="v2"&&parts.length===4){var it=Number(parts[1]);if(!Number.isInteger(it)||it<100000||it>1000000){recordLoginFailure(u,m);return}hash(p,parts[2],it).then(function(mat){if(mat.hash===parts[3]){clearLoginFailures(u);enter(u,1,mat.key)}else recordLoginFailure(u,m)}).catch(function(){m.textContent="Secure account storage is unavailable in this browser."})}
+  else if(parts.length===2){oldHash(p,parts[0]).then(function(h){if(h===parts[1]){var ns=genSalt();hash(p,ns).then(function(mat){var all=users();all[u]="v2$"+KDF_ITERATIONS+"$"+ns+"$"+mat.hash;st("rcs_users",JSON.stringify(all));clearLoginFailures(u);enter(u,1,mat.key)}).catch(function(){m.textContent="Could not secure this account."})}else recordLoginFailure(u,m)}).catch(function(){m.textContent="Secure account storage is unavailable in this browser."})}
+  else if(stored){hashLegacy(p).then(function(h){if(h===stored){var ns=genSalt();hash(p,ns).then(function(mat){var all=users();all[u]="v2$"+KDF_ITERATIONS+"$"+ns+"$"+mat.hash;st("rcs_users",JSON.stringify(all));clearLoginFailures(u);enter(u,1,mat.key)}).catch(function(){m.textContent="Could not secure this account."})}else recordLoginFailure(u,m)}).catch(function(){m.textContent="Secure account storage is unavailable in this browser."})}
+  else{recordLoginFailure(u,m)}};
 $("out").onclick=function(){save().finally(function(){U=null;VAULT_KEY=null;st("rcs_cur","");document.body.classList.remove("in");$("au").value=st("rcs_last")||"";openAuth("in")})};
 draw();
 var lu=st("rcs_last");if(lu)$("au").value=lu;
@@ -953,5 +963,7 @@ st("rcs_cur","");
 route();
 if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){})}
 </script>
+<script src="webcontrol/webcontrol-config.js"></script>
+<script src="webcontrol/site-client.js" defer></script>
 </body>
 </html>

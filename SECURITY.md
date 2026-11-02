@@ -1,21 +1,7 @@
-# Security Policy
+# Security
 
-## Supported Versions
+Security fixes are applied to the latest `main` branch. The static GitHub Pages app stores resume/card information in the user's browser; it does not provide server-side account authentication. The optional `webcontrol` backend is separate and must be deployed with HTTPS, private environment secrets, and persistent database storage.
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Do not put admin passwords, password hashes intended for another service, token secrets, or private API keys in website JavaScript or GitHub. Keep backend secrets in the hosting provider's private environment settings. The public `webcontrol-config.js` is only for the API's public URL.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
-## Reporting a Vulnerability
-
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+To report a vulnerability, use GitHub's private vulnerability reporting for this repository if it is enabled. Otherwise contact the repository owner privately before publishing details. Please include the affected page or endpoint and steps to reproduce; do not include real user data or active credentials.

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; script-src 'self'; style-src 'self'; connect-src 'self'">
+  <meta name="theme-color" content="#091326">
+  <title>Website control · Resume &amp; Card Studio</title>
+  <link rel="stylesheet" href="control.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="top"><a href="../index.html">← Studio</a><span>PRIVATE ADMIN</span></header>
+    <section class="card" id="loginCard">
+      <p class="eyebrow">MOBILE WEBSITE CONTROL</p>
+      <h1>Sign in</h1>
+      <p class="muted">Use the administrator credentials configured on your server.</p>
+      <form id="loginForm">
+        <label>Admin username<input id="username" autocomplete="username" required maxlength="100"></label>
+        <label>Admin password<input id="password" type="password" autocomplete="current-password" required maxlength="512"></label>
+        <button class="primary" type="submit">Open dashboard</button>
+      </form>
+      <p class="message" id="loginMessage" role="status"></p>
+      <p class="muted small">Never enter a website login password here. This is a separate admin account.</p>
+    </section>
+    <section class="dashboard hidden" id="dashboard">
+      <div class="welcome"><div><p class="eyebrow">CONTROL ROOM</p><h1>Website dashboard</h1></div><button class="secondary" id="logout">Sign out</button></div>
+      <section class="card">
+        <h2>Website settings</h2>
+        <p class="muted">These settings affect visitors after the backend URL is connected.</p>
+        <form id="settingsForm">
+          <label>Website title<input id="siteTitle" required maxlength="80"></label>
+          <label>Announcement<textarea id="announcement" rows="3" maxlength="240" placeholder="A short update for your visitors"></textarea></label>
+          <label class="check"><input id="announcementEnabled" type="checkbox"> Show announcement on the website</label>
+          <button class="primary" type="submit">Save settings</button>
+        </form>
+        <p class="message" id="settingsMessage" role="status"></p>
+      </section>
+      <section class="card">
+        <div class="section-head"><div><h2>Usage analytics</h2><p class="muted">Anonymous page view totals; no resume text, names, or emails.</p></div>
+          <select id="days" aria-label="Analytics time range"><option value="7">7 days</option><option value="30" selected>30 days</option><option value="90">90 days</option></select></div>
+        <div class="total"><strong id="totalViews">—</strong><span>page views</span></div>
+        <div class="counts" id="pageCounts"></div>
+        <p class="message" id="analyticsMessage" role="status"></p>
+      </section>
+    </section>
+    <p class="notice" id="connectionNote">Backend not connected yet. Set the public API URL in <code>webcontrol-config.js</code> after hosting the Python server.</p>
+  </main>
+  <script src="webcontrol-config.js"></script>
+  <script src="control.js" defer></script>
+</body>
+</html>
