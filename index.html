@@ -621,6 +621,11 @@ body.in .stage:has(#resume:not(.hide))::before{color:#cdeaff}
 body.in #hf{background:linear-gradient(120deg,#08b9d2,#176fdf 55%,#7629c8);border-color:rgba(186,223,255,.45)}
 #auth{background-color:#06162d;background-image:radial-gradient(ellipse at 22% 26%,rgba(5,198,200,.22),transparent 42%),radial-gradient(ellipse at 78% 76%,rgba(156,36,213,.27),transparent 44%),radial-gradient(ellipse at 50% 52%,rgba(6,74,151,.3),transparent 62%),repeating-linear-gradient(90deg,transparent 0 44px,rgba(24,111,203,.12) 45px,transparent 46px 89px),repeating-linear-gradient(0deg,transparent 0 44px,rgba(24,111,203,.1) 45px,transparent 46px 89px),linear-gradient(145deg,#06162d,#031020 62%,#171137)}
 @media(max-width:759px){body.in .form{background:linear-gradient(150deg,rgba(19,47,91,.96),rgba(34,29,78,.97))}}
+:root{--welcome-gradient:linear-gradient(145deg,#05c6c8 0%,#087dd1 42%,#2827ae 67%,#c30089 100%)}
+body.in{background:var(--welcome-gradient) fixed}
+body.in::before,body.in::after{display:none}
+#auth{background:var(--welcome-gradient)}
+#auth::after{display:none}
 </style>
 </head>
 <body>
