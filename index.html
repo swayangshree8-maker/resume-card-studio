@@ -455,6 +455,46 @@ body.in #fC input:focus-visible,body.in #fC textarea:focus-visible,body.in #fC s
 @media(prefers-reduced-motion:reduce){#auth::before,#auth::after,#welcome::before,#welcome::after{animation:none}}
 @media(max-width:900px){#auth .box{min-height:0;padding:34px 26px}}
 @media(prefers-reduced-motion:reduce){#auth.open .box{animation:none;clip-path:none;filter:none;transform:none}}
+
+/* Premium dashboard finish */
+body.in{background:radial-gradient(ellipse at 76% 8%,rgba(255,42,82,.22),transparent 34%),radial-gradient(ellipse at 92% 86%,rgba(255,92,45,.16),transparent 35%),radial-gradient(rgba(255,115,132,.11) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(145deg,#09070c 0%,#190910 48%,#260b12 100%) fixed}
+body.in::before{background:#c8103d;opacity:.32}
+body.in::after{background:#ef4b2d;opacity:.25}
+@media screen and (min-width:760px){body.in{grid-template-columns:252px minmax(0,1fr)}body.in header{padding:26px 18px;gap:16px}}
+body.in header{background:linear-gradient(180deg,rgba(42,25,33,.94),rgba(25,16,23,.94));border-right:1px solid rgba(255,128,145,.18);box-shadow:12px 0 42px rgba(0,0,0,.18)}
+body.in header h1{font-size:1.28rem;line-height:1.35;letter-spacing:-.035em;text-shadow:none}
+body.in .clk2{color:#ffc1c5;font-size:.78rem}
+body.in #who{font-size:.84rem;line-height:1.5}
+body.in .tabs{gap:6px;padding:6px;background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.1);border-radius:18px}
+body.in .tabs button{border-radius:12px;font-weight:700;transition:background .2s ease,transform .2s ease,color .2s ease}
+body.in .tabs button:hover{background:rgba(255,255,255,.1);transform:translateX(2px)}
+body.in .tabs button[aria-selected=true]{background:linear-gradient(105deg,#ff3c5b,#cc123e);color:#fff;box-shadow:0 8px 24px rgba(222,15,60,.28)}
+body.in #out,body.in #bk,body.in #hp{border-radius:12px!important;padding:10px 13px!important;text-align:left;box-shadow:0 8px 22px rgba(205,10,53,.17)}
+body.in main{padding:30px clamp(18px,3vw,48px) 42px;gap:24px;align-items:start}
+body.in .form{background:linear-gradient(155deg,rgba(55,39,47,.94),rgba(33,23,30,.94));border:1px solid rgba(255,160,172,.22);border-radius:22px;padding:22px;box-shadow:0 22px 60px rgba(0,0,0,.26),inset 0 1px rgba(255,255,255,.08);backdrop-filter:blur(18px)}
+body.in .form label{font-weight:650;color:#f5e9ed}
+body.in .form input,body.in .form textarea,body.in .form select{border:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.22);background:rgba(8,6,10,.28);border-radius:12px;padding:12px 13px;transition:border-color .2s,box-shadow .2s,background .2s}
+body.in .form input:focus-visible,body.in .form textarea:focus-visible,body.in .form select:focus-visible{outline:0;border-color:#ff718b;background:rgba(12,7,11,.52);box-shadow:0 0 0 3px rgba(255,66,100,.16)}
+body.in .sec{color:#ffd9df;letter-spacing:.12em}
+body.in .sec i{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#ff7357,#d80d45);box-shadow:0 6px 18px rgba(226,19,65,.28)}
+body.in .go{background:linear-gradient(110deg,#ff405e,#c8103e);color:#fff;border:1px solid rgba(255,255,255,.15);box-shadow:0 10px 24px rgba(201,12,56,.22);transition:transform .2s,filter .2s,box-shadow .2s}
+body.in .go:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 14px 30px rgba(201,12,56,.34)}
+body.in #home{max-width:1240px;padding:14px 0 30px}
+#home .home-banner{padding:clamp(24px,4vw,42px);margin-bottom:24px;border-radius:28px;background:linear-gradient(115deg,rgba(105,12,38,.78),rgba(54,17,34,.78) 55%,rgba(195,48,48,.38));border-color:rgba(255,144,158,.28);box-shadow:0 24px 70px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.12)}
+#home .home-kicker{color:#ffb3c0}
+#home h2{font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.045em;text-shadow:0 8px 36px rgba(0,0,0,.28)}
+#home .hp{max-width:620px;color:rgba(255,245,247,.78)}
+.hc{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hcard{min-height:286px;padding:27px 24px;border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.055));border-color:rgba(255,172,183,.2);box-shadow:0 18px 42px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.1)}
+.hcard:hover,.hcard:focus-visible{transform:translateY(-5px);outline:0;border-color:rgba(255,156,174,.65);box-shadow:0 24px 55px rgba(0,0,0,.26),0 0 36px rgba(236,37,83,.17)}
+.hcard .ic{width:58px;height:58px;display:grid;place-items:center;margin-bottom:22px;border-radius:18px;background:rgba(255,255,255,.1);font-size:2rem}
+.hcard b{font-size:1.22rem;letter-spacing:-.025em}
+.hcard .d{color:rgba(255,244,246,.76);line-height:1.7}
+.hcard .go2{margin-top:20px;border-radius:11px;background:#fff;color:#681326;transition:transform .2s}
+.hcard:hover .go2{transform:translateX(3px)}
+@media(max-width:1050px){.hc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:759px){body.in main{padding:18px 14px 32px;gap:16px}body.in #home{padding:8px 0 22px}.hc{grid-template-columns:1fr}.hcard{min-height:0;padding:24px}.hcard .ic{margin-bottom:14px}body.in .form{padding:17px;border-radius:18px}}
+@media(prefers-reduced-motion:reduce){body.in .go,body.in .tabs button,.hcard,.hcard .go2{transition:none}}
 </style>
 </head>
 <body>
