@@ -9,9 +9,9 @@ This Flask service adds a mobile admin panel at `webcontrol/control.html`, edita
 3. Set `ADMIN_USERNAME`, either `ADMIN_PASSWORD_HASH` or `ADMIN_PASSWORD`, and a random `TOKEN_SECRET` in the server environment. `TOKEN_SECRET` must be a new random value of at least 32 bytes. Do not commit `.env` or secrets.
 4. Set `CORS_ALLOW_ORIGIN` to the exact website origin, such as `https://swayangshree8-maker.github.io`. Start with `py -m webcontrol.app`.
 
-## Deploy on AWS
+## Deploy the free server
 
-AWS deployment files are in the `aws` directory. Follow `aws/README.md`. AWS requires an account, and its Free account plan is time-limited; plan for the server to stop when that plan expires.
+For the current no-cost setup, use PythonAnywhere and follow `PYTHONANYWHERE.md`. The AWS files in the repository are an optional alternative; the AWS Free account plan is time-limited.
 
 The local server binds to `127.0.0.1`; it is not exposed to the public internet. For mobile access from anywhere, deploy this backend to a Python host that provides HTTPS and persistent storage. Set its private environment variables there. A SQLite database on an ephemeral host filesystem will be lost when the instance is replaced, so configure a persistent disk or a managed database before relying on saved settings/analytics.
 
