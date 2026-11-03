@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = Path(os.environ.get("DATABASE_PATH", ROOT / "data" / "control.sqlite3"))
 ADMIN_USER = os.environ.get("ADMIN_USERNAME", "admin").strip().lower()
 ADMIN_HASH = os.environ.get("ADMIN_PASSWORD_HASH", "")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
 TOKEN_SECRET = os.environ.get("TOKEN_SECRET", "")
 ALLOWED_ORIGINS = {
     origin.strip().rstrip("/")
@@ -125,7 +126,7 @@ def token_for(user: str) -> str:
 
 
 def authorized() -> bool:
-    if not TOKEN_SECRET or not ADMIN_HASH:
+    if not TOKEN_SECRET or not (ADMIN_HASH or ADMIN_PASSWORD):
         return False
     token = request.headers.get("Authorization", "")
     if not token.startswith("Bearer "):
@@ -143,6 +144,10 @@ def authorized() -> bool:
 
 
 def password_matches(password: str) -> bool:
+    # ADMIN_PASSWORD is intended for a cloud provider's secret manager. Prefer
+    # ADMIN_PASSWORD_HASH when configuring a self-managed server.
+    if not ADMIN_HASH and ADMIN_PASSWORD:
+        return hmac.compare_digest(password, ADMIN_PASSWORD)
     try:
         scheme, rounds, salt, expected = ADMIN_HASH.split("$", 3)
         if scheme != "pbkdf2_sha256" or not 200_000 <= int(rounds) <= 2_000_000:
@@ -252,7 +257,7 @@ def security_headers(response):
 
 @app.get("/api/health")
 def health():
-    return jsonify(ok=True, configured=bool(TOKEN_SECRET and ADMIN_HASH))
+    return jsonify(ok=True, configured=bool(TOKEN_SECRET and (ADMIN_HASH or ADMIN_PASSWORD)))
 
 
 @app.get("/api/settings")
@@ -291,7 +296,7 @@ def admin_login():
     limited, remaining = login_is_limited(user)
     if limited:
         return jsonify(error="Too many sign-in attempts", retry_after=remaining), 429
-    if not TOKEN_SECRET or not ADMIN_HASH:
+    if not TOKEN_SECRET or not (ADMIN_HASH or ADMIN_PASSWORD):
         return jsonify(error="Admin is not configured on the server"), 503
     valid_user = hmac.compare_digest(user, ADMIN_USER)
     valid_password = password_matches(password)
@@ -372,6 +377,6 @@ if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "hash-passwor
     print(make_password_hash(secret))
 elif __name__ == "__main__":
     init_db()
-    if not TOKEN_SECRET or not ADMIN_HASH:
-        raise SystemExit("Set TOKEN_SECRET and ADMIN_PASSWORD_HASH before starting the server.")
+    if not TOKEN_SECRET or not (ADMIN_HASH or ADMIN_PASSWORD):
+        raise SystemExit("Set TOKEN_SECRET and either ADMIN_PASSWORD_HASH or ADMIN_PASSWORD before starting the server.")
     app.run(host="127.0.0.1", port=int(os.environ.get("PORT", "8000")), debug=False)
