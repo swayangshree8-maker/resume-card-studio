@@ -9,11 +9,9 @@ This Flask service adds a mobile admin panel at `webcontrol/control.html`, edita
 3. Set `ADMIN_USERNAME`, either `ADMIN_PASSWORD_HASH` or `ADMIN_PASSWORD`, and a random `TOKEN_SECRET` in the server environment. `TOKEN_SECRET` must be a new random value of at least 32 bytes. Do not commit `.env` or secrets.
 4. Set `CORS_ALLOW_ORIGIN` to the exact website origin, such as `https://swayangshree8-maker.github.io`. Start with `py -m webcontrol.app`.
 
-## Deploy the free Render server
+## Deploy on AWS
 
-The repository includes a Render Blueprint at `render.yaml`. Open the [Render Blueprint deploy page](https://render.com/deploy), choose this GitHub repository, and enter a unique admin password of at least 14 characters when Render asks for `ADMIN_PASSWORD`. Render generates `TOKEN_SECRET`; the secret values stay in Render and are not saved in GitHub. Keep the service on the Free plan.
-
-Free Render services can sleep after inactivity and do not include persistent disks. This starter setup stores its small settings and analytics database in temporary storage, so a service restart or redeploy can reset those records. Render's free tier is suitable for trying the control panel, but it does not guarantee durable settings or analytics. Do not enter private customer information into this control panel.
+AWS deployment files are in the `aws` directory. Follow `aws/README.md`. AWS requires an account, and its Free account plan is time-limited; plan for the server to stop when that plan expires.
 
 The local server binds to `127.0.0.1`; it is not exposed to the public internet. For mobile access from anywhere, deploy this backend to a Python host that provides HTTPS and persistent storage. Set its private environment variables there. A SQLite database on an ephemeral host filesystem will be lost when the instance is replaced, so configure a persistent disk or a managed database before relying on saved settings/analytics.
 
